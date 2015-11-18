@@ -1,0 +1,8 @@
+
+public interface IData {
+	/**
+	 * Get a question from the Data Object
+	 * @return question
+	 */
+	public Question getQuestion();
+}

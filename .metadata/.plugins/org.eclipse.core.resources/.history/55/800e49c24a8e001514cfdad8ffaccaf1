@@ -1,0 +1,28 @@
+import java.io.Serializable;
+
+public class PlayerAnswer implements Serializable {
+	private static final long serialVersionUID = 1L;
+	
+	public PlayerAnswer() {
+		this(false, false);
+	}
+	
+	public PlayerAnswer(boolean answered, boolean correct) {
+		this.answered = answered;
+		this.correct = correct;
+	}
+	
+	/**
+	 * Boolean indicating whether a players attempted to answer this question
+	 */
+	public boolean answered;
+	
+	/**
+	 * Boolean indicating whether a player correctly answered the question
+	 */
+	public boolean correct;
+	
+	public int score;
+	
+	public int runningStreak;
+}

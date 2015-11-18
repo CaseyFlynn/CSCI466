@@ -1,0 +1,105 @@
+import java.util.*;
+
+public class Client {
+	
+	public String playerName = "Anon";
+	private ServerCom serverCom;
+	private ClientCom clientCom;
+	private ClientUI ui;
+	private Question question;
+	public static void main(String args[]) {
+		Client c = new Client();
+		c.run();
+	}
+	
+	
+	public void run() {
+		//create server communication thread
+		serverCom = new ServerCom(this);
+		serverCom.start();
+		
+		//create client communication thread
+		clientCom = new ClientCom(this, -1);
+		//client com will not run until we have joined a game.
+		
+		ui = new ClientUI(this);
+		ui.run();
+	}
+	
+	public void answerQuestion(int answer, boolean answered) {
+		PlayerAnswer pa = new PlayerAnswer(answered, false);
+		if (answer == 1) {
+			//TODO: inform clients correct answer
+			pa.correct = true;
+		} else {
+			//TODO: inform clients wrong answer
+		}
+		serverCom.questionDone(pa);
+	}
+	
+	public void setPlayerName(String playerName) {
+		this.playerName = playerName;
+		serverCom.setNameOnServer(playerName);
+	}
+	
+	public void requestGames() {
+		serverCom.requestGames();
+	}
+	
+	public void createGame(String gameName) {
+		serverCom.createNewGame(gameName);
+		serverCom.requestGames();
+	}
+	
+	public void joinGame(int gameId) {
+		serverCom.joinGame(gameId);
+		serverCom.requestPlayersInGame();
+	}
+	
+	public void leaveGame() {
+		serverCom.leaveGame();
+	}
+	
+	public void questionRecieved(Question q) {
+		System.out.println(q.getQuestion());
+		question = q;
+		serverCom.ackQuestion();
+	}
+	
+	public void displayQuestion(long offset) {
+		System.out.println("offset: " + offset);
+		Timer t = new Timer();
+		TimerTask tt = new TimerTask() {
+			@Override
+			public void run() {
+				ui.displayQuestion(question);
+			}
+		};
+		t.schedule(tt, 5000);
+	}
+	
+	public void gamesRecieved(ArrayList<Game> games) {
+		System.out.println("# of games running: " + games.size());
+		for (Game g : games) {
+			System.out.println(g.getGameId());
+		}
+		
+		//call client UI to update game list on display
+		ui.loadGames(games);
+	}
+	
+	public void sendBuzz() {
+		//TODO: send out buzz!!
+	}
+	
+	public void serverTicksRecieved(long ticks) {
+		System.out.println(ticks);
+	}
+
+	public void playersRecieved(HashSet<Player> players) {
+		System.out.println("# Players recieved from server: " + players.size());
+		for (Player p : players) {
+			System.out.println(p.getName());
+		}
+	}
+}
