@@ -165,8 +165,6 @@ public class ClientUI extends JFrame implements Runnable {
 		tpAnswer2.setVisible(showAnswers);
 		tpAnswer3.setVisible(showAnswers);
 		tpAnswer4.setVisible(showAnswers);
-		//TODO: this is reversed. Removed, we will need to redo
-		//the progress bar
 		//tpBuzzTimer.setVisible(!showAnswers);
 
 		this.invalidate();
@@ -400,9 +398,6 @@ public class ClientUI extends JFrame implements Runnable {
 		tpBuzzTimer.setBounds(476, 249, 92, 91);
 		pnlGame.add(tpBuzzTimer);
 
-		//TODO: buzz timer logic
-		tpBuzzTimer.setVisible(false);
-		
 		JTextPane tpQuestionDisplay = new JTextPane();
 		tpQuestionDisplay.setEditable(false);
 		tpQuestionDisplay.setText("Crazy Trivia Time!");
