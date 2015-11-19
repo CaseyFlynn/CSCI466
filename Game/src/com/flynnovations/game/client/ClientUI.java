@@ -522,6 +522,17 @@ public class ClientUI extends JFrame implements Runnable {
 		this.invalidate();
 	}
 
+	public void resetBuzz() {
+		answerTimer.stop();
+		btnBuzz.setEnabled(true);
+		btnBuzz.setVisible(true);
+		toggleAnswerButtons(false);
+		toggleBuzzHideAnswers(false);
+		tpBuzzTimer.setText("5");
+		tpBuzzTimer.setVisible(false);
+		buzzTimeCounter = 5;
+	}
+	
 	public void displayQuestion(Question q) {
 		this.gameTimerCounter = gameTimerMax;
 		gameTimer.start();

@@ -18,6 +18,7 @@ public class ClientCom extends Thread {
 	private final String ANSWER_CORRECT = "AnswerCorrect";
 	private final String ANSWER_INCORRECT = "AnswerIncorrect";
 	private int gameId;
+
 	
 	public ClientCom(Client client, int gameId) {
 		
@@ -90,28 +91,42 @@ public class ClientCom extends Thread {
 		}
 	}
 	
-
-	public void sendBuzz(String playerName) {
-		//long buzzTime = System.nanoTime() + serverTimeOffset;
-		String msg = BUZZ + " " + playerName;
+	public void sendBuzz(String playerName, long serverTime, long serverOffset) {
+		client.hasBuzzed = true;
+		client.buzzOffset = Math.abs(serverTime - System.currentTimeMillis() - serverOffset);
+		String buzzTime = String.format("%019d", client.buzzOffset);
+		String msg = BUZZ + " " + buzzTime + " " + playerName;
 		sendMessage(msg);
 	}
 
 	public void sendAnswer(boolean correct) {
 		System.out.println("SENDING answer.");
+		client.hasAnswered = true;
 		String answer = ((correct) ? ANSWER_CORRECT : ANSWER_INCORRECT) + " " +client.playerName;
 		sendMessage(answer);
 	}
 
 	private void buzzRecieved(String msg) {
-		String playerName = msg.substring(BUZZ.length() + 1).trim();
+		String paddedBuzz = msg.substring(BUZZ.length() + 1, BUZZ.length() + 1 + 19);
+		long buzzOffset = Long.parseLong(paddedBuzz);
+		String playerName = msg.substring(BUZZ.length() + 20).trim();
+
+		//do not lock ourselves out
 		if (!playerName.equals(client.playerName)) {
-			this.client.buzzRecieved(playerName);
+			//we will lock out if we have not buzzed, or they buzzed before us
+			if (!client.hasBuzzed || (client.buzzOffset < buzzOffset && !client.hasAnswered)) {
+				this.client.buzzRecieved(playerName);
+				if (client.hasBuzzed) {
+					//they buzzed in first, reset buzz metrics
+					client.resetBuzz();
+				}
+			}
 		}
 	}
 	
 	private void answerRecieved(boolean isCorrect, String msg) {
 		System.out.println("ANSWER RECIEVED");
+
 		int offset = ((isCorrect) ? ANSWER_CORRECT.length() : ANSWER_INCORRECT.length() ) + 1;
 		String playerName = msg.substring(offset).trim();
 		client.answerRecieved(isCorrect, playerName);
