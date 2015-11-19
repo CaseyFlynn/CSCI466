@@ -16,7 +16,12 @@ public class Client {
 	private Question question;
 	private long serverOffset;
 	private long rttStart;
+	private long lastServerTime;
 	private HashSet<PlayerInfo> playerInfo;
+	
+	public boolean hasBuzzed = false;
+	public boolean hasAnswered = false;
+	public long buzzOffset = Long.MAX_VALUE;
 	
 	
 	public static void main(String args[]) {
@@ -108,13 +113,25 @@ public class Client {
 		serverCom.leaveGame();
 	}
 	
+	public void resetBuzz() {
+		hasBuzzed = false;
+		hasAnswered = false;
+		buzzOffset = Long.MAX_VALUE;
+		//TODO: clientUI reset
+		ui.resetBuzz();
+	}
+	
 	public void questionRecieved(Question q) {
+		hasBuzzed = false;
+		hasAnswered = false;
+		buzzOffset = Long.MAX_VALUE;
+		
 		question = q;
 		serverCom.ackQuestion();
 	}
 	
 	public void displayQuestion(long serverTime) {
-		System.out.println("serverTime: " + serverTime);
+		lastServerTime = serverTime;
 		Timer t = new Timer();
 		TimerTask tt = new TimerTask() {
 			@Override
@@ -146,7 +163,7 @@ public class Client {
 	}
 	
 	public void sendBuzz() {
-		clientCom.sendBuzz(playerName);
+		clientCom.sendBuzz(playerName, lastServerTime, serverOffset);
 	}
 	
 	public void buzzRecieved(String playerName) {

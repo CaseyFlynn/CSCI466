@@ -100,7 +100,6 @@ public class ServerCom extends Thread {
 			String questionString = serializedQuestion.substring(COM_QUESTION.length() + 1);
 			Question q = Serializer.deserialize(questionString, Question.class);
 			client.questionRecieved(q);
-
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
