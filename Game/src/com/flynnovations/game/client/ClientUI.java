@@ -95,6 +95,7 @@ public class ClientUI extends JFrame implements Runnable {
 
 	private void buzz() {
 		btnBuzz.setEnabled(false);
+		btnBuzz.setVisible(false);
 		gameTimer.stop();
 		client.sendBuzz();
 		toggleAnswerButtons(true);
@@ -167,7 +168,7 @@ public class ClientUI extends JFrame implements Runnable {
 		tpAnswer4.setVisible(showAnswers);
 		//TODO: this is reversed. Removed, we will need to redo
 		//the progress bar
-		//tpBuzzTimer.setVisible(!showAnswers);
+		tpBuzzTimer.setVisible(showAnswers);
 
 		this.invalidate();
 	}
@@ -383,21 +384,21 @@ public class ClientUI extends JFrame implements Runnable {
 		});
 		btnLeaveGame.setBounds(10, 506, 120, 35);
 		pnlGame.add(btnLeaveGame);
-
-		tpEventInfo = new JTextPane();
-		tpEventInfo.setEditable(false);
-		tpEventInfo.setFont(new Font("Tahoma", Font.BOLD, 36));
-		tpEventInfo.setForeground(Color.WHITE);
-		tpEventInfo.setBackground(Color.BLACK);
-		tpEventInfo.setText("Waiting On Question");
-		tpEventInfo.setBounds(320, 50, 444, 450);
-		pnlGame.add(tpEventInfo);
+		
+				tpEventInfo = new JTextPane();
+				tpEventInfo.setEditable(false);
+				tpEventInfo.setFont(new Font("Tahoma", Font.BOLD, 36));
+				tpEventInfo.setForeground(Color.WHITE);
+				tpEventInfo.setBackground(Color.BLACK);
+				tpEventInfo.setText("Waiting On Question");
+				tpEventInfo.setBounds(320, 50, 444, 450);
+				pnlGame.add(tpEventInfo);
 
 		tpBuzzTimer = new JTextPane();
 		tpBuzzTimer.setEditable(false);
 		tpBuzzTimer.setFont(new Font("Tahoma", Font.BOLD, 72));
 		tpBuzzTimer.setText("5");
-		tpBuzzTimer.setBounds(476, 249, 92, 91);
+		tpBuzzTimer.setBounds(491, 419, 92, 81);
 		pnlGame.add(tpBuzzTimer);
 
 		//TODO: buzz timer logic
@@ -535,6 +536,7 @@ public class ClientUI extends JFrame implements Runnable {
 		this.tpAnswer3.setText(q.getAnswer3());
 		this.tpAnswer4.setText(q.getAnswer4());
 		btnBuzz.setEnabled(true);
+		btnBuzz.setVisible(true);
 		contentPane.repaint();
 		gameTimer.start();
 	}
