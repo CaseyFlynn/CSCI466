@@ -1,0 +1,39 @@
+WARNING - 19:10:30: First conversion pass
+ERROR - 19:10:30: org.xml.sax.SAXParseExceptionpublicId: /Game/src/com/flynnovations/game/client/Client.java; systemId: file:///Game/src/com/flynnovations/game/client/Client.java; lineNumber: 1; columnNumber: 1; Content is not allowed in prolog.
+ERROR - 19:10:30: org.xml.sax.SAXParseExceptionpublicId: /Game/src/com/flynnovations/game/client/Client.java; systemId: file:///Game/src/com/flynnovations/game/client/Client.java; lineNumber: 1; columnNumber: 1; Content is not allowed in prolog.
+WARNING - 19:10:51: Convert com.flynnovations.game.client
+INFO - 19:10:51: Java PackageFragment com.flynnovations.game.client was translated as UML ModelImpl client
+WARNING - 19:10:51: First conversion pass
+INFO - 19:10:51: Entering Java PackageFragment com.flynnovations.game.client
+ERROR - 19:10:51: org.xml.sax.SAXParseExceptionpublicId: /Game/src/com/flynnovations/game/client/Client.java; systemId: file:///Game/src/com/flynnovations/game/client/Client.java; lineNumber: 1; columnNumber: 1; Content is not allowed in prolog.
+org.eclipse.emf.ecore.resource.impl.ResourceSetImpl.handleDemandLoadException(ResourceSetImpl.java:319)
+org.eclipse.emf.ecore.resource.impl.ResourceSetImpl.demandLoadHelper(ResourceSetImpl.java:278)
+org.eclipse.emf.ecore.resource.impl.ResourceSetImpl.getResource(ResourceSetImpl.java:406)
+org.eclipse.umlgen.reverse.java.AbstractJava2UMLConverter.load(AbstractJava2UMLConverter.java:2274)
+org.eclipse.umlgen.reverse.java.Java2UMLConverter.initializeModel(Java2UMLConverter.java:110)
+org.eclipse.umlgen.reverse.java.AbstractJava2UMLConverter.convert(AbstractJava2UMLConverter.java:347)
+org.eclipse.umlgen.reverse.java.AbstractJava2UMLConverter.doConvertion(AbstractJava2UMLConverter.java:546)
+org.eclipse.umlgen.reverse.java.AbstractJava2UMLConverter.convert(AbstractJava2UMLConverter.java:256)
+org.eclipse.umlgen.reverse.java.AbstractJava2UMLConverter.convert(AbstractJava2UMLConverter.java:2248)
+org.eclipse.umlgen.reverse.java.internal.wizards.Java2UMLWizard.doFinish(Java2UMLWizard.java:178)
+org.eclipse.umlgen.reverse.java.internal.wizards.Java2UMLWizard$1.run(Java2UMLWizard.java:104)
+org.eclipse.jface.operation.ModalContext$ModalContextThread.run(ModalContext.java:119)
+ERROR - 19:10:51: org.xml.sax.SAXParseExceptionpublicId: /Game/src/com/flynnovations/game/client/Client.java; systemId: file:///Game/src/com/flynnovations/game/client/Client.java; lineNumber: 1; columnNumber: 1; Content is not allowed in prolog.
+org.eclipse.umlgen.reverse.java.AbstractJava2UMLConverter.throwCoreException(AbstractJava2UMLConverter.java:2216)
+org.eclipse.umlgen.reverse.java.AbstractJava2UMLConverter.load(AbstractJava2UMLConverter.java:2281)
+org.eclipse.umlgen.reverse.java.Java2UMLConverter.initializeModel(Java2UMLConverter.java:110)
+org.eclipse.umlgen.reverse.java.AbstractJava2UMLConverter.convert(AbstractJava2UMLConverter.java:347)
+org.eclipse.umlgen.reverse.java.AbstractJava2UMLConverter.doConvertion(AbstractJava2UMLConverter.java:546)
+org.eclipse.umlgen.reverse.java.AbstractJava2UMLConverter.convert(AbstractJava2UMLConverter.java:256)
+org.eclipse.umlgen.reverse.java.AbstractJava2UMLConverter.convert(AbstractJava2UMLConverter.java:2248)
+org.eclipse.umlgen.reverse.java.internal.wizards.Java2UMLWizard.doFinish(Java2UMLWizard.java:178)
+org.eclipse.umlgen.reverse.java.internal.wizards.Java2UMLWizard$1.run(Java2UMLWizard.java:104)
+org.eclipse.jface.operation.ModalContext$ModalContextThread.run(ModalContext.java:119)
+WARNING - 19:11:19: First conversion pass
+ERROR - 19:11:19: java.net.MalformedURLException: unknown protocol: pathmap
+ERROR - 19:11:51: org.xml.sax.SAXParseExceptionpublicId: /Game/src/com/flynnovations/game/client/Client.java; systemId: file:///Game/src/com/flynnovations/game/client/Client.java; lineNumber: 1; columnNumber: 1; Content is not allowed in prolog.
+ERROR - 19:11:51: org.xml.sax.SAXParseExceptionpublicId: /Game/src/com/flynnovations/game/client/Client.java; systemId: file:///Game/src/com/flynnovations/game/client/Client.java; lineNumber: 1; columnNumber: 1; Content is not allowed in prolog.
+ERROR - 19:12:29: org.xml.sax.SAXParseExceptionpublicId: /Game/src/com/flynnovations/game/client/Client.java; systemId: file:///Game/src/com/flynnovations/game/client/Client.java; lineNumber: 1; columnNumber: 1; Content is not allowed in prolog.
+ERROR - 19:12:29: org.xml.sax.SAXParseExceptionpublicId: /Game/src/com/flynnovations/game/client/Client.java; systemId: file:///Game/src/com/flynnovations/game/client/Client.java; lineNumber: 1; columnNumber: 1; Content is not allowed in prolog.
+ERROR - 19:12:32: org.xml.sax.SAXParseExceptionpublicId: /Game/src/com/flynnovations/game/client/Client.java; systemId: file:///Game/src/com/flynnovations/game/client/Client.java; lineNumber: 1; columnNumber: 1; Content is not allowed in prolog.
+ERROR - 19:12:32: org.xml.sax.SAXParseExceptionpublicId: /Game/src/com/flynnovations/game/client/Client.java; systemId: file:///Game/src/com/flynnovations/game/client/Client.java; lineNumber: 1; columnNumber: 1; Content is not allowed in prolog.
