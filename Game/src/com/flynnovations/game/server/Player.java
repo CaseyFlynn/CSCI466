@@ -332,6 +332,8 @@ public class Player extends Thread  implements Serializable{
 				if (answer.correct) correctAnswers++;
 				this.score += answer.score;
 				this.runningStreak = answer.runningStreak;
+			} else {
+				System.out.println("AWW FUCK");
 			}
 
 			//inform game that this player is ready for the next question

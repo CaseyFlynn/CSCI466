@@ -19,7 +19,7 @@ public class Game implements Serializable {
 	//Game Communication Strings
 	private final String COM_SEND_QUESTION = "Question";
 	private final String COM_DISPLAY_QUESTION = "Display";
-	
+	private boolean hasStarted = false;
 	public int totalQuestionsAsked = 0;
 	
 	//Game vars
@@ -78,11 +78,12 @@ public class Game implements Serializable {
 	 */
 	public void subscribe(Player p) {
 		//inform users of player joining
-		System.out.println("Player: " + p.getWorkstationId() + "joined game: " + gameId);
+		System.out.println("Player: " + p.getName() + " joined game: " + gameId);
 		players.add(p);
 
 		//check to see if this is our first subscription
-		if (players.size() == 1) {
+		if (players.size() == 1 && !hasStarted) {
+			hasStarted = true;
 			runGame();
 		}
 	}
@@ -118,9 +119,18 @@ public class Game implements Serializable {
 		try {
 			//get a question from data access layer
 			Question q = dataAccess.getQuestion();
-			
+			pendingAck.clear();
+			pendingAnswer.clear();
 			//serialize the question
 			String serializedQuestion = Serializer.serialize(q);
+
+			for (Player p : players)
+			{
+				//add player to list of pending ack
+				pendingAck.add(p);
+				
+	
+			}
 			
 			//foreach player in players
 			for (Player p : players)
@@ -128,16 +138,19 @@ public class Game implements Serializable {
 				//increment player question counter
 				p.questionsAsked++;
 				try {
+
+					//add player to list of pending ack
+					//pendingAck.add(p);
+					
+					//add player to list of pending answer
+					//pendingAnswer.add(p);
+
 					//send the question
 					p.sendMessage(COM_SEND_QUESTION + " " + serializedQuestion);
 					
-					//add player to list of pending ack
-					pendingAck.add(p);
-					
-					//add player to list of pending answer
-					pendingAnswer.add(p);
 				} catch (Exception e) {
 					//can't send messages to user, kill em
+					System.out.println("****************************NNNNNNNNNNNNNNN************************");
 					e.printStackTrace();
 					unSubscribe(p);
 				}
@@ -168,7 +181,11 @@ public class Game implements Serializable {
 	
 	public synchronized void addAck(Player p) {
 		//remove player from pending ack
-		pendingAck.remove(p);
+		if (pendingAck.contains(p)) {
+			//add player to list of pending answer
+			pendingAnswer.add(p);			
+			pendingAck.remove(p);
+		}
 
 		//if all players have ack'd, send display message
 		if (pendingAck.isEmpty()) {
@@ -178,7 +195,9 @@ public class Game implements Serializable {
 	
 	public synchronized void playerDone(Player p) {
 		//remove player from list of pending answer
-		pendingAnswer.remove(p);
+		if (pendingAnswer.contains(p)){
+			pendingAnswer.remove(p);
+		}
 		
 		//for fun, display the user has answered, this should be removed after testing
 		System.out.println("Player: " + p.getWorkstationId() + " answered.");

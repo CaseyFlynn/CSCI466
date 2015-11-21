@@ -26,11 +26,11 @@ public class Config {
 		Properties p = new Properties();
 		try {
 			p.load(new FileInputStream(propertiesFile));
-			serverIP = p.getProperty("serverIP", "192.168.1.128");
+			serverIP = p.getProperty("serverIP", "localhost");
 			serverPort = Integer.parseInt(p.getProperty("serverPort", "9991"));
 			clientPort = Integer.parseInt(p.getProperty("clientPort", "9992"));
 		} catch (Exception e) {
-			serverIP = "192.168.1.128";
+			serverIP = "localhost";
 			serverPort = 9991;
 			clientPort = 9992;
 		}
