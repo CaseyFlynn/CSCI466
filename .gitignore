@@ -1,4 +1,5 @@
 *.pydevproject
+.recommenders
 .metadata
 .gradle
 bin/

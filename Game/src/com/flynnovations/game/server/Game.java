@@ -40,7 +40,7 @@ public class Game implements Serializable {
 	 * Return all players subscribed to this game
 	 * @return HashSet<Player> containing all players
 	 */
-	public HashSet<Player> getPlayers() {
+	public synchronized HashSet<Player> getPlayers() {
 		return players;
 	}
 	
