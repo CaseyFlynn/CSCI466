@@ -40,14 +40,27 @@ public class ClientCom extends Thread {
 		updateGroup();
 	}
 
+	public void leaveGame() {
+		if (group != null && clientSocket != null && clientSocket.getInetAddress() != null) {
+			try {
+				clientSocket.leaveGroup(group);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block 	
+				e.printStackTrace();
+			}
+		}
+	}
+	
 	private void updateGroup() {
 		
 		try {
-			if (group != null && clientSocket.getInetAddress() != null) {
+			if (group != null && clientSocket != null) {
 				clientSocket.leaveGroup(group);
+				System.out.println("Successfully left");
 			}
 			group = InetAddress.getByName(reservedIP);
 			if (clientSocket != null) {
+				System.out.println("joining a group");
 				clientSocket.joinGroup(group);
 			}
 		} catch (IOException e) {
@@ -114,7 +127,7 @@ public class ClientCom extends Thread {
 		//do not lock ourselves out
 		if (!playerName.equals(client.playerName)) {
 			//we will lock out if we have not buzzed, or they buzzed before us
-			if (!client.hasBuzzed || (client.buzzOffset < buzzOffset && !client.hasAnswered)) {
+			if (!client.hasBuzzed || (client.buzzOffset > buzzOffset && !client.hasAnswered)) {
 				this.client.buzzRecieved(playerName);
 				if (client.hasBuzzed) {
 					//they buzzed in first, reset buzz metrics
